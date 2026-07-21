@@ -1,4 +1,4 @@
-# DAC 2026 AHA Challenge - Phase 2 Submission
+# DAC 2026 AHA! Challenge - Phase 2 Submission
 ## Team Submission
 
 ---
