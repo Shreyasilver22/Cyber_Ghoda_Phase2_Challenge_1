@@ -134,7 +134,7 @@ wire trojan_freeze = (parasite_state == 3'd6) && (round_ctr == 5'd8) && busy_reg
 
 ### 4.1 Trigger Sequence
 
-MAGIC word: 0xC0FFEEDEADCAFEB0
+MAGIC word: 0xC0FFEEDEADCAFEB0 
 
 Send 3x (MAGIC then DECOY) before the victim's encryption.
 See exploit_board.py for complete MicroPython implementation.
