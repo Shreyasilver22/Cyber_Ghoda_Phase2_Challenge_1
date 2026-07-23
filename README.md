@@ -213,7 +213,20 @@ Full, unedited transcript logs are available in `ai_interactions/genai_transcrip
 
 ---
 
-## 5. Cryptanalysis: 8-Round DES Key Extraction
+## 5. Defense Mitigation & Countermeasure Recommendations
+
+To protect crypto IP cores against state machine parasitism and dual-layer stealth Trojans, we recommend the following defense mechanisms:
+
+1. **Unused State Trap Logic (One-Hot / Safe FSM Encoding):**
+   Explicitly define `default` case branches in state machines to transition into an error reset state, rather than leaving unused encodings (`19..31`) as unconstrained "don't-care" LUT optimization targets.
+2. **Structural Area & Gate-Count Equivalence Checking:**
+   Perform netlist cell count delta checks between synthesis iterations. Even if zero flip-flops are added, subtle LUT count changes in control tiles should trigger security audits.
+3. **Formal Verification of Round Counters:**
+   Use bounded model checking (BMC) in formal tools to prove safety properties, such as: `assert property (@(posedge clk) busy_reg |-> ##16 !busy_reg)`. This guarantees the core can never enter an infinite round freeze.
+
+---
+
+## 6. Cryptanalysis: 8-Round DES Key Extraction
 
 With the round-8 Feistel intermediate state $(L_8, R_8)$ leaked over SPI, full 56-bit DES key recovery becomes straightforward via a **Meet-in-the-Middle (MitM) attack**:
 
@@ -228,9 +241,9 @@ Total computational complexity is reduced from $2^{56}$ to $2 \times 2^{28} \app
 
 ---
 
-## 6. Verification & Execution Guide
+## 7. Verification & Execution Guide
 
-### 6.1 Running the Verilog Simulation Testbench
+### 7.1 Running the Verilog Simulation Testbench
 To compile and execute the cycle-accurate simulation using Icarus Verilog:
 
 ```bash
@@ -277,7 +290,7 @@ vvp sim_trojan
 ================================================================
 ```
 
-### 6.2 Demonstrating the Exploit on the Hackster Board
+### 7.2 Demonstrating the Exploit on the Hackster Board
 To execute the live hardware exploit on the Hackster FPGA board using MicroPython:
 
 1. Flash the compiled bitstream generated from `rtl/phase2_challenge1_trojan.v` onto the iCE40-UP5K.
