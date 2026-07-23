@@ -1,6 +1,6 @@
 # DAC 2026 AHA Challenge - Phase 2 Submission
 ## Challenge 1: Advanced Hardware Trojan Generation & Injection
-**Team Submission & Technical Brief**
+
 
 ---
 
